@@ -1,0 +1,11 @@
+sv:
+  site_settings:
+    discourse_ratelimit_posts_enabled: "Aktivera begränsning av inlägg per dag"
+    discourse_ratelimit_posts_tl0_daily_limit: "Daglig gräns för inlägg för användare med förtroendenivå 0 (0 = obegränsat)"
+    discourse_ratelimit_posts_tl1_daily_limit: "Daglig gräns för inlägg för användare med förtroendenivå 1 (0 = obegränsat)"
+    discourse_ratelimit_posts_tl2_daily_limit: "Daglig gräns för inlägg för användare med förtroendenivå 2 (0 = obegränsat)"
+    discourse_ratelimit_posts_tl3_daily_limit: "Daglig gräns för inlägg för användare med förtroendenivå 3 (0 = obegränsat)"
+    discourse_ratelimit_posts_tl4_daily_limit: "Daglig gräns för inlägg för användare med förtroendenivå 4 (0 = obegränsat)"
+    discourse_ratelimit_posts_exempt_categories: "Kategorier som är undantagna från inläggsbegränsningar (användare kan posta obegränsat i dessa kategorier)"
+  discourse_ratelimit_posts:
+    daily_limit_exceeded: "Du har nått din dagliga gräns på %{limit} inlägg för förtroendenivå %{trust_level}. Du har %{remaining} inlägg kvar idag."

@@ -1,0 +1,9 @@
+sv:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_ratelimit_posts: "Begränsning av inlägg"
+  js:
+    discourse_ratelimit_posts:
+      daily_limit_exceeded: "Du har nått din dagliga gräns på %{limit} inlägg för förtroendenivå %{trust_level}. Du har %{remaining} inlägg kvar idag."
