@@ -1,0 +1,11 @@
+en:
+  site_settings:
+    discourse_ratelimit_posts_enabled: "Enable post rate limiting plugin"
+    discourse_ratelimit_posts_tl0_daily_limit: "Daily post limit for Trust Level 0 users (0 = unlimited)"
+    discourse_ratelimit_posts_tl1_daily_limit: "Daily post limit for Trust Level 1 users (0 = unlimited)"
+    discourse_ratelimit_posts_tl2_daily_limit: "Daily post limit for Trust Level 2 users (0 = unlimited)"
+    discourse_ratelimit_posts_tl3_daily_limit: "Daily post limit for Trust Level 3 users (0 = unlimited)"
+    discourse_ratelimit_posts_tl4_daily_limit: "Daily post limit for Trust Level 4 users (0 = unlimited)"
+    discourse_ratelimit_posts_exempt_categories: "Categories exempt from post limits (users can post unlimited in these categories)"
+  discourse_ratelimit_posts:
+    daily_limit_exceeded: "You have reached your daily post limit of %{limit} posts for trust level %{trust_level}. You have %{remaining} posts remaining today."

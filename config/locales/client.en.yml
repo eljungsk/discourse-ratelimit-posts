@@ -1,0 +1,9 @@
+en:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_ratelimit_posts: "Discourse Rate Limit Posts"
+  js:
+    discourse_ratelimit_posts:
+      daily_limit_exceeded: "You have reached your daily post limit of %{limit} posts for trust level %{trust_level}. You have %{remaining} posts remaining today."
