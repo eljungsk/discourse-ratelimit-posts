@@ -28,7 +28,7 @@ RSpec.describe DiscourseRateLimitPosts::NewPostManagerExtension do
         result = manager.perform
         
         expect(result.success?).to eq(true)
-        expect(PostLimits::PostLimitChecker.send(:posts_created_today, user_tl0)).to eq(1)
+        expect(DiscourseRateLimitPosts::PostLimitChecker.send(:posts_created_today, user_tl0)).to eq(1)
       end
     end
 

@@ -16,7 +16,7 @@ module DiscourseRateLimitPosts
                    remaining: remaining,
                    trust_level: user.trust_level)
           )
-          return
+          return @result
         end
       end
       
