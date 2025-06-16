@@ -1,8 +1,8 @@
 import { click, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
-import { 
-  acceptance, 
-  updateCurrentUser 
+import {
+  acceptance,
+  updateCurrentUser
 } from "discourse/tests/helpers/qunit-helpers";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import DiscoveryFixtures from "discourse/tests/fixtures/discovery-fixtures";
@@ -49,10 +49,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 0 Users", function (
       return helper.response({
         success: true,
         action: "create_post",
-        post: { 
-          id: 123, 
-          topic_id: 280, 
-          topic_slug: "internationalization-localization", 
+        post: {
+          id: 123,
+          topic_id: 280,
+          topic_slug: "internationalization-localization",
           post_number: 2,
           cooked: "<p>This is my test reply</p>",
           raw: "This is my test reply",
@@ -72,12 +72,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 0 Users", function (
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     assert.dom(".d-editor-input").exists("composer is open");
-    
+
     await fillIn(".d-editor-input", "This is my test reply within limits");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - post was successful");
   });
@@ -99,10 +99,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 0 Users", function (
     await click("#topic-footer-buttons .btn.create");
     await fillIn(".d-editor-input", "This post should fail due to limit");
     await click("#reply-control button.create");
-    
+
     assert.dom(".dialog-body").exists("error dialog appears");
     assert.dom(".dialog-body").includesText("daily post limit", "shows post limit error message");
-    
+
     await click(".dialog-footer .btn-primary");
     assert.dom(".dialog-body").doesNotExist("error dialog is dismissed");
     assert.dom(".d-editor-input").exists("composer stays open");
@@ -117,12 +117,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 0 Users", function (
 
     await visit("/c/general/1");
     await click("#create-topic");
-    
+
     await fillIn("#reply-title", "My New Topic Within Limits");
     await fillIn(".d-editor-input", "This is the content of my new topic");
-    
+
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (topic creation was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - topic creation was successful");
   });
@@ -144,9 +144,9 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 0 Users", function (
     await click("#create-topic");
     await fillIn("#reply-title", "Topic That Should Fail");
     await fillIn(".d-editor-input", "Content that exceeds limit");
-    
+
     await click("#reply-control button.create");
-    
+
     assert.dom(".dialog-body").exists("shows error dialog");
     assert.dom(".dialog-body").includesText("daily post limit", "shows appropriate error message");
   });
@@ -207,10 +207,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 1 Users", function (
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "TL1 user post within higher limits");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - TL1 user can post with higher limits");
   });
@@ -232,7 +232,7 @@ acceptance("Discourse Rate Limit Posts Plugin - Trust Level 1 Users", function (
     await click("#topic-footer-buttons .btn.create");
     await fillIn(".d-editor-input", "TL1 post that exceeds limit");
     await click("#reply-control button.create");
-    
+
     assert.dom(".dialog-body").exists("shows error dialog for TL1 limit");
     assert.dom(".dialog-body").includesText("10 posts for trust level 1", "shows correct TL1 limit in error");
   });
@@ -290,10 +290,10 @@ acceptance("Discourse Rate Limit Posts Plugin - High Trust Level Users", functio
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "TL4 unlimited post");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - TL4 user can post without limits");
   });
@@ -351,10 +351,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Staff Users", function (needs) {
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "Moderator post bypassing limits");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - moderator can post despite low trust level");
   });
@@ -368,10 +368,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Staff Users", function (needs) {
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "Admin post bypassing limits");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - admin can post despite low trust level");
   });
@@ -385,12 +385,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Staff Users", function (needs) {
 
     await visit("/c/general/1");
     await click("#create-topic");
-    
+
     await fillIn("#reply-title", "Staff Topic No Limits");
     await fillIn(".d-editor-input", "Staff can create topics without restrictions");
-    
+
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (topic creation was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - staff topic created successfully");
   });
@@ -448,10 +448,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Plugin Disabled", function (need
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "Post when plugin disabled");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - TL0 user can post when plugin disabled");
   });
@@ -465,12 +465,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Plugin Disabled", function (need
 
     await visit("/c/general/1");
     await click("#create-topic");
-    
+
     await fillIn("#reply-title", "Topic When Plugin Disabled");
     await fillIn(".d-editor-input", "Topic creation works when plugin is disabled");
-    
+
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (topic creation was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - topic created when plugin disabled");
   });
@@ -529,13 +529,13 @@ acceptance("Discourse Rate Limit Posts Plugin - Warning Messages", function (nee
     // Test that warning messages can be created even if regular limit would be exceeded
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "This is a warning message");
-    
+
     // In a real implementation, we'd need to simulate the warning message flow
     // For now, we test that the post can be created (warning messages use is_warning: true)
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - warning message created successfully");
   });
@@ -593,10 +593,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Edge Cases", function (needs) {
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     await fillIn(".d-editor-input", "Post with unlimited TL0");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - TL0 with 0 limit (unlimited) works");
   });
@@ -618,7 +618,7 @@ acceptance("Discourse Rate Limit Posts Plugin - Edge Cases", function (needs) {
     await click("#topic-footer-buttons .btn.create");
     await fillIn(".d-editor-input", "Second post should fail");
     await click("#reply-control button.create");
-    
+
     assert.dom(".dialog-body").exists("shows error for very low limit");
     assert.dom(".dialog-body").includesText("1 posts for trust level 1", "shows correct limit of 1");
   });
@@ -679,10 +679,10 @@ acceptance("Discourse Rate Limit Posts Plugin - Category Exemptions", function (
       return helper.response({
         success: true,
         action: "create_post",
-        post: { 
-          id: 123, 
-          topic_id: 280, 
-          topic_slug: "internationalization-localization", 
+        post: {
+          id: 123,
+          topic_id: 280,
+          topic_slug: "internationalization-localization",
           post_number: 2,
           cooked: "<p>This is my test reply</p>",
           raw: "This is my test reply",
@@ -703,12 +703,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Category Exemptions", function (
     // Test posting in exempt category 1
     await visit("/c/exempt-category/1");
     await click("#create-topic");
-    
+
     await fillIn("#reply-title", "Post in Exempt Category");
     await fillIn(".d-editor-input", "This should work even after reaching limits");
-    
+
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - exempt category allows posts");
   });
@@ -730,16 +730,16 @@ acceptance("Discourse Rate Limit Posts Plugin - Category Exemptions", function (
     // Test posting in regular category (should fail due to limit)
     await visit("/c/regular-category/2");
     await click("#create-topic");
-    
+
     await fillIn("#reply-title", "Post in Regular Category");
     await fillIn(".d-editor-input", "This should fail due to limits");
-    
+
     await click("#reply-control button.create");
-    
+
     // Check that error dialog appears (limit exceeded)
     assert.dom(".dialog-body").exists("error dialog appears in regular category");
     assert.dom(".dialog-body").includesText("daily post limit", "shows post limit error");
-    
+
     // Close the error dialog
     await click(".dialog-footer .btn-primary");
   });
@@ -754,12 +754,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Category Exemptions", function (
     // Test posting in exempt category 3
     await visit("/c/another-exempt/3");
     await click("#create-topic");
-    
+
     await fillIn("#reply-title", "Post in Another Exempt Category");
     await fillIn(".d-editor-input", "This should also work in exempt category 3");
-    
+
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (post was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - second exempt category works");
   });
@@ -773,12 +773,12 @@ acceptance("Discourse Rate Limit Posts Plugin - Category Exemptions", function (
 
     await visit("/t/internationalization-localization/280");
     await click("#topic-footer-buttons .btn.create");
-    
+
     assert.dom(".d-editor-input").exists("composer is open");
-    
+
     await fillIn(".d-editor-input", "Reply in exempt category topic");
     await click("#reply-control button.create");
-    
+
     // Check that no error dialog appears (reply was successful)
     assert.dom(".dialog-body").doesNotExist("no error dialog appears - reply in exempt category works");
   });

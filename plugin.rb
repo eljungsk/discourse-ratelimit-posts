@@ -21,7 +21,5 @@ after_initialize do
   require_relative "lib/discourse_rate_limit_posts/new_post_manager_extension"
   
   # Extend NewPostManager to check post limits
-  NewPostManager.class_eval do
-    prepend DiscourseRateLimitPosts::NewPostManagerExtension
-  end
+  NewPostManager.prepend DiscourseRateLimitPosts::NewPostManagerExtension
 end

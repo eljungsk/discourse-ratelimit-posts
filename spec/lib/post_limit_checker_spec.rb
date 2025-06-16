@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe DiscourseRateLimitPosts::PostLimitChecker do
   fab!(:user_tl0) { Fabricate(:user, trust_level: 0) }
   fab!(:user_tl1) { Fabricate(:user, trust_level: 1) }
-  fab!(:admin) { Fabricate(:admin) }
-  fab!(:moderator) { Fabricate(:moderator) }
+  fab!(:admin)
+  fab!(:moderator)
 
   before do
     SiteSetting.discourse_ratelimit_posts_enabled = true

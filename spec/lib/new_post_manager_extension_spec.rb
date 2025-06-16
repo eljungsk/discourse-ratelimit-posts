@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe DiscourseRateLimitPosts::NewPostManagerExtension do
   fab!(:user_tl0) { Fabricate(:user, trust_level: 0) }
-  fab!(:admin) { Fabricate(:admin) }
-  fab!(:topic) { Fabricate(:topic) }
+  fab!(:admin)
+  fab!(:topic)
 
   before do
     SiteSetting.discourse_ratelimit_posts_enabled = true
