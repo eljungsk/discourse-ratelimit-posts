@@ -1,12 +1,12 @@
 import { click, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
-import {
-  acceptance,
-  updateCurrentUser
-} from "discourse/tests/helpers/qunit-helpers";
-import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import DiscoveryFixtures from "discourse/tests/fixtures/discovery-fixtures";
 import TopicFixtures from "discourse/tests/fixtures/topic";
+import pretender, { response } from "discourse/tests/helpers/create-pretender";
+import {
+  acceptance,
+  updateCurrentUser,
+} from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("Discourse Rate Limit Posts Plugin - Trust Level 0 Users", function (needs) {
   needs.user();
