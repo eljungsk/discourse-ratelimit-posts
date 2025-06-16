@@ -38,7 +38,7 @@ module DiscourseRateLimitPosts
       SiteSetting.discourse_ratelimit_posts_enabled && 
       user.present? && 
       !user.staff? && 
-      !@args[:is_warning] # Don't limit warning messages
+      !args[:is_warning] # Don't limit warning messages
     end
     
     def add_error_to_result(message)
@@ -48,12 +48,12 @@ module DiscourseRateLimitPosts
     end
     
     def get_category_id
-      # For new topics, category_id is in @args
-      return @args[:category_id] if @args[:category_id].present?
+      # For new topics, category_id is in args
+      return args[:category_id] if args[:category_id].present?
       
       # For replies, get category from the topic
-      if @args[:topic_id].present?
-        topic = Topic.find_by(id: @args[:topic_id])
+      if args[:topic_id].present?
+        topic = Topic.find_by(id: args[:topic_id])
         return topic&.category_id
       end
       
